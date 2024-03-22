@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
 	},
 	{ collection: "Users" }
 );
-const User = mongoose.model("User", userSchema);
+const userModel = mongoose.model("User", userSchema);
 
 const listingSchema = new mongoose.Schema(
 	{
@@ -69,7 +69,8 @@ app.get("/", function (req, res) {
 
 app.get("/users", async function (req, res) {
 	//get all users
-	User.find({})
+	userModel
+		.find({})
 		.then((data) => {
 			console.log(data);
 		})
