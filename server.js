@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema(
 	},
 	{ collection: "Users" }
 );
-const User = mongoose.model("User", userSchema);
+let User;
+
+if (User !== null) User = mongoose.model("User", userSchema);
 
 const listingSchema = new mongoose.Schema(
 	{
