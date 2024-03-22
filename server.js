@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const multer = require("multer");
 app.use(bodyParser.urlencoded({ extended: false }));
+var User = require("./user.js");
 
 // connect to the MongoDB
 mongoose
@@ -19,23 +20,6 @@ mongoose
 		console.log(err);
 		process.exit(1);
 	});
-
-const userSchema = new mongoose.Schema(
-	{
-		email: { type: String, required: [true, "Email is required"] },
-		password: { type: String, required: [true, "Password is required"] },
-		phone: { type: String },
-		orderhistory: [String],
-		paymentinfo: {
-			cardnumber: { type: String },
-			CCV: { type: String },
-			cardexpiry: { type: String },
-		},
-		listeditems: [String],
-	},
-	{ collection: "Users" }
-);
-const userModel = mongoose.model("User", userSchema);
 
 const listingSchema = new mongoose.Schema(
 	{
@@ -69,8 +53,7 @@ app.get("/", function (req, res) {
 
 app.get("/users", async function (req, res) {
 	//get all users
-	userModel
-		.find({})
+	User.find({})
 		.then((data) => {
 			console.log(data);
 		})
