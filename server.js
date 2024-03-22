@@ -8,6 +8,7 @@ require("dotenv").config();
 const multer = require("multer");
 app.use(bodyParser.urlencoded({ extended: false }));
 var User = require("./user.js");
+var Listing = require("./listing.js");
 
 // connect to the MongoDB
 mongoose
@@ -20,28 +21,6 @@ mongoose
 		console.log(err);
 		process.exit(1);
 	});
-
-const listingSchema = new mongoose.Schema(
-	{
-		name: { type: String, required: [true, "Name is required"] },
-		price: {
-			type: Number,
-			required: [true, "Price is required"],
-			validate: {
-				validator: function (value) {
-					return value >= 0;
-				},
-				message: () => "Please enter a valid price",
-			},
-		},
-		description: { type: String, required: [true, "Description is required"] },
-		dateposted: { type: Date, default: Date.now, required: true },
-		images: [String],
-		location: { type: String, required: [true, "Location is required"] },
-	},
-	{ collection: "Listings" }
-);
-const Listing = mongoose.model("Listing", listingSchema);
 
 // Set up multer
 // Create the multer instance
