@@ -131,4 +131,7 @@ dist
 
 # uploaded images
 images
+tmp
+
+# vercel
 .vercel

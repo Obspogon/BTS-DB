@@ -6,6 +6,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const multer = require("multer");
+const discardStorage = require("multer-discard-storage")();
 app.use(bodyParser.urlencoded({ extended: false }));
 var User = require("./user.js");
 var Listing = require("./listing.js");
@@ -24,7 +25,7 @@ mongoose
 
 // Set up multer
 // Create the multer instance
-const upload = multer({ dest: "./tmp/" });
+const upload = multer({ storage: discardStorage });
 
 app.get("/", function (req, res) {
 	res.send("Hello World");
