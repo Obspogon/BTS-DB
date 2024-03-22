@@ -24,7 +24,7 @@ mongoose
 
 // Set up multer
 // Create the multer instance
-const upload = multer({ dest: "./images/" });
+const upload = multer({ dest: "./tmp/" });
 
 app.get("/", function (req, res) {
 	res.send("Hello World");
